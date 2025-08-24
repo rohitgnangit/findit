@@ -1,12 +1,9 @@
 "use client"
-import React from 'react'
-import { useState,Suspence,  useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { redirect, useSearchParams } from 'next/navigation'
 import { toast } from 'react-toastify'
-import {signIn} from "next-auth/react"
-import {useRouter} from 'next/navigation'
-import { useSession } from 'next-auth/react'
-import { getSession } from 'next-auth/react'
+import { signIn, useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 
 const Login = () => {
@@ -14,32 +11,33 @@ const Login = () => {
   const [password, setPassword] = useState("")
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { data: session } = useSession()
-  
-  
-  const loginHandle = async(e) => {
+  const { data: session, status } = useSession() // Use 'status' to check if the session is still loading
+
+  //  useEffect will run after the component mounts and a session is loaded
+  useEffect(() => {
+    if (status === 'authenticated') {
+      router.push('/Home')
+    }
+  }, [session, status, router])
+
+  const loginHandle = async (e) => {
     e.preventDefault()
-    const loginDetails = {email, password}
-    console.log(loginDetails)
-    // Giving signIn credentials as email,password and throwing to next-auth then email and password will store into credentials
-      const response = await signIn("credentials", {
-              email,
-              password,
-              redirect:false,
-          })
-        console.log(response)
-    if(response?.ok){
-        router.push('/Home')
-    }else{
+    const response = await signIn("credentials", {
+      email,
+      password,
+      redirect: false,
+    })
+
+    if (response?.ok) {
+      // The useEffect will now handle the redirect, no need to do it here
+    } else {
       toast.error("Invalid credentials")
-      }
-      setEmail("")
-      setPassword("")
+    }
+    setEmail("")
+    setPassword("")
   }
 
-  
   return (
-
     <>
       <div className="py-20 h-[83.5vh] bg-slate-200">
         <div className="shadow-2xl bg-white w-[90%] md:w-[40%] container mx-auto p-5 border border-slate-200 rounded-lg">
@@ -56,7 +54,7 @@ const Login = () => {
             <div className="h-[1px] bg-slate-800 my-2"></div>
 
             <Link href={'/Users/Signup'}>
-            <p className="text-blue-800 text-sm text-center">SignUp</p>
+              <p className="text-blue-800 text-sm text-center">SignUp</p>
             </Link>
           </form>
         </div>
