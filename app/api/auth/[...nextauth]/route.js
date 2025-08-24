@@ -3,6 +3,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import NextAuth from "next-auth";
 import connectDB from "@/db/connectDB";
 import User from "@/models/User";
+import bcrypt from 'bcryptjs';
 
 export const authOptions = ({
   providers: [
@@ -23,10 +24,12 @@ export const authOptions = ({
             return null;
           }
         //   If user found but entered incorrect password then console invalid password
-          if (credentials.password !== user.password) {
-            console.log("Invalid password");
-            return null;
-          }
+          const isMatch = await bcrypt.compare(credentials.password, user.password);
+
+                if (!isMatch) {
+                    console.log("Invalid password");
+                    return null;
+                }
 
           return {
             id: user._id.toString(),

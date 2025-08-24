@@ -11,7 +11,7 @@ const Login = () => {
   const [password, setPassword] = useState("")
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { data: session, status } = useSession() // Use 'status' to check if the session is still loading
+  const { data: session, status } = useSession()
 
   //  useEffect will run after the component mounts and a session is loaded
   useEffect(() => {

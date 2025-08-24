@@ -14,3 +14,9 @@
 .scrollbar-thin::-webkit-scrollbar-track {
   background-color: #cffafe;
 }
+
+input[type="password"] {
+    -webkit-appearance: auto;
+    appearance: auto;
+    background-color: initial;
+}
