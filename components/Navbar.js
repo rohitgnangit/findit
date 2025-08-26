@@ -18,7 +18,7 @@ const Navbar = () => {
                     <h1 className="text-2xl font-extrabold text-white"><Image src="/lflogo.png" alt="logo" width={90} height={90}/></h1>
                 </Link>
                 <div className="list flex justify-between items-center gap-3 md:gap-10 h-full">
-                    <Link href={'/Home'} className={`${pathName === '/Home'? "text-white font-bold  py-4 h-full border-b-4 border-cyan-400":"text-slate-200 font-semibold"}`}>
+                    <Link href={'/home'} className={`${pathName === '/Home'? "text-white font-bold  py-4 h-full border-b-4 border-cyan-400":"text-slate-200 font-semibold"}`}>
                         <p className="">Home</p>
                     </Link>
                     {/* If LoggedIn display Dropdown*/}
@@ -35,7 +35,7 @@ const Navbar = () => {
                                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" />
                             </svg>
                         </button>
-                        <div id="dropdownAvatarName" className={`${showDropdown ? "block" : "hidden"} z-10 bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700 dark:divide-gray-600 absolute top-10`}>
+                        <div id="dropdownAvatarName" className={`${showDropdown ? "block" : "hidden"} z-10 bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700 dark:divide-gray-600 absolute top-10 -right-3`}>
                             <div className="px-4 py-3 text-sm text-gray-900 dark:text-white">
                                 <div className="font-medium "></div>
                                 <div className="truncate">{session.user.email}</div>

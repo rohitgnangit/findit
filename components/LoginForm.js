@@ -1,6 +1,5 @@
 "use client"
 import React, { useState, useEffect } from 'react'
-import { redirect, useSearchParams } from 'next/navigation'
 import { toast } from 'react-toastify'
 import { signIn, useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
@@ -10,15 +9,14 @@ const Login = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const router = useRouter();
-  const searchParams = useSearchParams();
   const { data: session, status } = useSession()
 
   //  useEffect will run after the component mounts and a session is loaded
   useEffect(() => {
     if (status === 'authenticated') {
-      router.push('/Home')
+      router.push('/home')
     }
-  }, [session, status, router])
+  }, [status, router])
 
   const loginHandle = async (e) => {
     e.preventDefault()
@@ -28,14 +26,16 @@ const Login = () => {
       redirect: false,
     })
 
-    if (response?.ok) {
-      // The useEffect will now handle the redirect, no need to do it here
+    if (!response?.ok) {
+      setTimeout(()=>toast.error("Invalid credentials"),0)
     } else {
-      toast.error("Invalid credentials")
+      router.push("/home")
     }
     setEmail("")
     setPassword("")
   }
+ 
+  
 
   return (
     <>

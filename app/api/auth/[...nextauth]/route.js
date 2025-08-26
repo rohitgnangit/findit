@@ -5,6 +5,7 @@ import connectDB from "@/db/connectDB";
 import User from "@/models/User";
 import bcrypt from 'bcryptjs';
 
+
 export const authOptions = ({
   providers: [
     CredentialsProvider({
@@ -50,8 +51,13 @@ export const authOptions = ({
 //   Must add secrete for authontication
   secret: process.env.NEXTAUTH_SECRET,
   
-  // Jwt for admin role
  callbacks: {
+  async redirect({url, baseUrl}){
+    console.log("URL", url)
+    console.log("BASEURL", baseUrl)
+    if(url.startsWith(baseUrl)) return url;
+    return baseUrl+'/home'
+  },
   async jwt({ token, user }) {
     if (user) {
       token.role = user.role; 
