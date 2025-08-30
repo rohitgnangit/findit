@@ -53,10 +53,7 @@ export const authOptions = ({
   
  callbacks: {
   async redirect({url, baseUrl}){
-    console.log("URL", url)
-    console.log("BASEURL", baseUrl)
-    if(url.startsWith(baseUrl)) return url;
-    return baseUrl+'/home'
+    return baseUrl;
   },
   async jwt({ token, user }) {
     if (user) {
