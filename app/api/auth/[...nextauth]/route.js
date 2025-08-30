@@ -48,7 +48,7 @@ export const authOptions = ({
     signIn: "/Users/Login",
     error: "/Users/Login", 
   },
-//   Must add secrete for authontication
+//   Must add secret for authontication
   secret: process.env.NEXTAUTH_SECRET,
   
  callbacks: {
