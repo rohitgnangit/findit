@@ -5,11 +5,15 @@ import { NextResponse } from 'next/server'
 
 export async function middleware(req) {
     const token = await getToken({req, secret:process.env.NEXTAUTH_SECRET})
-    // console.log("Token", token)
+    const {pathname} = req.nextUrl;
+
+    console.log("Current Pathname", pathname)
+    console.log("Token", token)
+
     const protectedRoutes = ["/home","/ItemForm/FoundItem","/ItemForm/LostItem"]
 
     if(!token && protectedRoutes.includes(req.nextUrl.pathname)){
-        return NextResponse.redirect(new URL("/Users/Login", req.url));
+        return NextResponse.redirect(new URL("/Users/Login", req.nextUrl.origin));
     }
     return NextResponse.next();
 }
