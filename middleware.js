@@ -10,7 +10,7 @@ export async function middleware(req) {
     console.log("Current Pathname", pathname)
     console.log("Token", token)
 
-    const protectedRoutes = ["/home","/ItemForm/FoundItem","/ItemForm/LostItem"]
+    const protectedRoutes = ["/Home","/ItemForm/FoundItem","/ItemForm/LostItem"]
 
     if(!token && protectedRoutes.includes(req.nextUrl.pathname)){
         return NextResponse.redirect(new URL("/Users/Login", req.nextUrl.origin));
@@ -19,5 +19,5 @@ export async function middleware(req) {
 }
  
 export const config = {
-  matcher: ["/home","/ItemForm/FoundItem","/ItemForm/LostItem"]
+  matcher: ["/Home","/ItemForm/FoundItem","/ItemForm/LostItem"]
 }

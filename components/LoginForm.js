@@ -17,7 +17,7 @@ const Login = () => {
   //  useEffect will run after the component mounts and a session is loaded
   useEffect(() => {
     if (status === 'authenticated') {
-      router.push('/home')
+      router.push('/Home')
     }
   }, [status, router])
 
@@ -32,7 +32,7 @@ const Login = () => {
     if (!response?.ok) {
       setTimeout(() => toast.error("Invalid credentials"), 0)
     } else {
-      router.push("/home")
+      router.push("/Home")
     }
     setEmail("")
     setPassword("")
