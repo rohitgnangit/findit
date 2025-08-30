@@ -15,11 +15,13 @@ const Login = () => {
   const eyeRef = useRef()
 
   //  useEffect will run after the component mounts and a session is loaded
-  // useEffect(() => {
-  //   if (status === 'authenticated') {
-  //       router.push('/Home')
-  //   }
-  // }, [status, router])
+  useEffect(() => {
+    if (status === 'authenticated') {
+      setTimeout(() => {
+        router.push('/Home')
+      }, 2000);
+    }
+  }, [status, router])
 
   const loginHandle = async (e) => {
     e.preventDefault()

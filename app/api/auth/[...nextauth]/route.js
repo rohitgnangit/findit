@@ -52,12 +52,10 @@ export const authOptions = ({
   secret: process.env.NEXTAUTH_SECRET,
   
  callbacks: {
-  async redirect({ url, baseUrl }) {
-    if(url.startsWith(baseUrl)) {
-      return `${baseUrl}/Home`;
-    }
+  async redirect({url, baseUrl}){
     return baseUrl;
   },
+  
   async jwt({ token, user }) {
     if (user) {
       token.role = user.role; 
