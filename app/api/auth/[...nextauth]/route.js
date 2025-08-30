@@ -52,8 +52,8 @@ export const authOptions = ({
   secret: process.env.NEXTAUTH_SECRET,
   
  callbacks: {
-  async redirect({url, baseUrl}){
-    return baseUrl;
+    async redirect({ url, baseUrl }) {
+    return `${baseUrl}/Home`;
   },
   
   async jwt({ token, user }) {

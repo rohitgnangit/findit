@@ -17,9 +17,7 @@ const Login = () => {
   //  useEffect will run after the component mounts and a session is loaded
   useEffect(() => {
     if (status === 'authenticated') {
-      setTimeout(() => {
         router.push('/Home')
-      }, 2000);
     }
   }, [status, router])
 
@@ -28,7 +26,7 @@ const Login = () => {
     const response = await signIn("credentials", {
       email,
       password,
-      redirect: false,
+      // redirect: false,
     })
 
     if (!response?.ok) {
