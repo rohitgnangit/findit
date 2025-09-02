@@ -67,8 +67,8 @@ const Home = ({ foundItems, lostItems }) => {
                                     <div className=" my-8 h-[40vh] md:h-[60vh] w-[90%] md:w-[30%] bg-white border border-slate-300 rounded-lg shadow-xl transition transform hover:scale-101" key={fitem._id}>
                                         <Link href={`/ItemDetails/${fitem._id}`}>
                                             <div key={fitem._id} className="item flex flex-col justify-center items-center h-full w-full rounded-lg shadow-xl">
-                                                <div className="image h-[80%] w-[95%] my-3 rounded-lg overflow-hidden relative">
-                                                    <Image className=" h-full w-full mx-auto border border-slate-300 rounded-lg" src={fitem.image} alt="wallet" width="1000" height="1000" priority /><span className="absolute top-4 right-4 text-white bg-green-600 bg-opacity-50 px-2 py-1 rounded">
+                                                <div className="image flex justify-center items-center h-[80%] w-[95%] my-3 rounded-lg overflow-hidden bg-slate-500 relative">
+                                                    <Image className=" mx-auto border border-slate-300 rounded-lg" src={fitem.image} alt="wallet" width="1000" height="1000" priority /><span className="absolute top-4 right-4 text-white bg-green-600 bg-opacity-50 px-2 py-1 rounded">
                                                         {fitem.role}
                                                     </span>
                                                 </div>
@@ -97,8 +97,8 @@ const Home = ({ foundItems, lostItems }) => {
                                     <div className=" my-8 h-[40vh] md:h-[60vh] w-[90%] md:w-[30%] bg-white border border-slate-300 rounded-lg shadow-xl transition transform hover:scale-101" key={litem._id}>
                                         <Link href={`/ItemDetails/${litem._id}`}>
                                             <div key={litem._id} className="item flex flex-col justify-center items-center h-full w-full rounded-lg shadow-xl">
-                                                <div className="image h-[80%] w-[95%] my-3 rounded-lg overflow-hidden relative">
-                                                    <Image className="h-full w-full mx-auto border border-slate-300 rounded-lg" src={litem.image} alt="wallet" width="1000" height="1000" priority /><span className="absolute top-4 right-4 text-white bg-red-600 bg-opacity-50 px-2 py-1 rounded">
+                                                <div className="image flex justify-center items-center h-[80%] w-[95%] my-3 rounded-lg overflow-hidden bg-slate-500 relative">
+                                                    <Image className=" mx-auto border border-slate-300 rounded-lg" src={litem.image} alt="wallet" width="1000" height="1000" priority /><span className="absolute top-4 right-4 text-white bg-red-600 bg-opacity-50 px-2 py-1 rounded">
                                                         {litem.role}
                                                     </span>
                                                 </div>

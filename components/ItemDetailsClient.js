@@ -25,8 +25,8 @@ const ItemDetailsClient = ({ itemInfo }) => {
       <div className="p-4 h-[95%] border border-slate-400 bg-gray-300 rounded-lg shadow-lg flex flex-col justify-center items-center w-[90%] md:w-[50%]">
         <h2 className="text-2xl font-bold">{itemInfo.role}</h2>
         <p className="text-gray-600 font-semibold">{itemInfo.itemName}</p>
-        <div className="image h-[95%] w-full md:w-[80%] overflow-hidden mt-3">
-          <Image src={itemInfo.image} alt={itemInfo.itemName} height={300} width={300} className="w-full h-full mx-auto rounded-lg" />
+        <div className="image flex justify-center items-center h-[95%] w-full md:w-[80%] overflow-hidden mt-3 rounded-lg">
+          <Image src={itemInfo.image} alt={itemInfo.itemName} height={500} width={500} className=" mx-auto rounded-lg" />
         </div>
         <p className="mt-2 text-sm text-gray-500">
           Posted by: <span className="font-semibold">{ownerName}</span>
