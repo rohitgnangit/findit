@@ -1,7 +1,7 @@
 "use client"
-import connectDB from '@/db/connectDB'
+
 import React from 'react'
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 import { signUpAction } from '@/actions/signUpAction'
 import { ToastContainer, toast } from 'react-toastify'
 import { useRouter } from 'next/navigation'
@@ -12,9 +12,8 @@ const Signup = () => {
     const [userName, setUserName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [passwordVisibility, setPasswordVisibility] = useState(false)
     const router = useRouter()
-    const passwordRef = useRef()
-    const eyeRef = useRef()
 
     const signUpHandle = async (e) => {
         e.preventDefault()
@@ -45,14 +44,7 @@ const Signup = () => {
     }
 
     const showPassword = () => {
-        passwordRef.current.type = 'password'
-        if (eyeRef.current.src.includes('/eyecross.png')) {
-            eyeRef.current.src = '/eye.png'
-            passwordRef.current.type = 'text'
-        } else {
-            eyeRef.current.src = '/eyecross.png'
-            passwordRef.current.type = 'password'
-        }
+       setPasswordVisibility(!passwordVisibility)
     }
 
     return (
@@ -70,8 +62,10 @@ const Signup = () => {
 
                         <label htmlFor="password">Password :</label>
                         <div className="pass relative">
-                            <input ref={passwordRef} onChange={(e) => setPassword(e.target.value)} value={password} type="password" name="password" placeholder="enter password" className='w-full px-3 py-1 border border-slate-300 rounded-lg' required />
-                            <span className="w-6 absolute top-[5px] right-4 cursor-pointer" onClick={showPassword}><img ref={eyeRef} src="/eyecross.png" alt="eye" /></span>
+                            <input onChange={(e) => setPassword(e.target.value)} value={password} type={passwordVisibility?"text":"password"} name="password" placeholder="enter password" className='w-full px-3 py-1 border border-slate-300 rounded-lg' required />
+                            <span className="w-6 absolute top-[5px] right-4 cursor-pointer" onClick={showPassword}>
+                                <img src={passwordVisibility?"/eye.png":"/eyecross.png"} alt="eye" />
+                            </span>
                         </div>
                         <button type="submit" className="text-white bg-gradient-to-r from-cyan-600 to-blue-600 hover:bg-gradient-to-bl focus:ring-2 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-1 py-2 text-center mt-6 mb-2 cursor-pointer">Sign Up</button>
                         <div className="bg-slate-400 h-0.5 my-1"></div>

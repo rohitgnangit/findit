@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { toast } from 'react-toastify'
 import { signIn, useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
@@ -9,15 +9,14 @@ import { ToastContainer } from 'react-toastify'
 const Login = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [passwordVisibility, setPasswordVisibility] = useState(false)
   const router = useRouter();
   const { data: session, status } = useSession()
-  const passwordRef = useRef()
-  const eyeRef = useRef()
 
   //  useEffect will run after the component mounts and a session is loaded
   useEffect(() => {
     if (status === 'authenticated') {
-        router.push('/Home')
+      router.push('/Home')
     }
   }, [status, router])
 
@@ -37,14 +36,7 @@ const Login = () => {
   }
 
   const showPassword = () => {
-    passwordRef.current.type = 'password'
-    if (eyeRef.current.src.includes('/eyecross.png')) {
-      eyeRef.current.src = '/eye.png'
-      passwordRef.current.type = 'text'
-    } else {
-      eyeRef.current.src = '/eyecross.png'
-      passwordRef.current.type = 'password'
-    }
+    setPasswordVisibility(!passwordVisibility);
   }
 
 
@@ -63,8 +55,10 @@ const Login = () => {
 
             <label htmlFor="password">Password :</label>
             <div className="pass relative">
-              <input ref={passwordRef} onChange={(e) => setPassword(e.target.value)} value={password} type="password" name="password" placeholder="enter password" className='px-3 py-1 border border-slate-300 rounded-lg w-full' required />
-              <span className="w-6 absolute top-[5px] right-4 cursor-pointer" onClick={showPassword}><img ref={eyeRef} src="/eyecross.png" alt="eye" /></span>
+              <input onChange={(e) => setPassword(e.target.value)} value={password} type={passwordVisibility?"text":"password"} name="password" placeholder="enter password" className='px-3 py-1 border border-slate-300 rounded-lg w-full' required />
+              <span className="w-6 absolute top-[5px] right-4 cursor-pointer" onClick={showPassword}>
+                <img src={passwordVisibility ?"/eye.png" : "/eyecross.png"} alt="eye" />
+              </span>
             </div>
             <button type="submit" className="text-white bg-gradient-to-r from-cyan-600 to-blue-600 hover:bg-gradient-to-bl focus:ring-2 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-1 py-2 text-center mt-6 mb-2 cursor-pointer">Login</button>
 
